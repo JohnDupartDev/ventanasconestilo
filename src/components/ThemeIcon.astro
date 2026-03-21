@@ -1,0 +1,76 @@
+---
+/* Componente de cambio de tema funcional para Cortinas & Persianas */
+---
+
+<button
+  id="themeToggle"
+  class="group relative p-2.5 rounded-md bg-surface-container/50 hover:bg-surface-container-high border border-outline-variant transition-all duration-300 pointer-events-auto overflow-hidden flex items-center justify-center min-w-[42px] min-h-[42px]"
+  aria-label="Cambiar modo de color"
+>
+  <svg
+    id="sun-icon"
+    class="w-5 h-5 text-primary transition-all duration-500"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    stroke-width="2"
+  >
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+  </svg>
+
+  <svg
+    id="moon-icon"
+    class="w-5 h-5 text-on-surface transition-all duration-500 hidden"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    stroke-width="2"
+  >
+    <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+  </svg>
+</button>
+
+<script is:inline>
+  // Esta función debe estar disponible inmediatamente
+  function applyTheme() {
+    const theme = localStorage.getItem('theme') || 'dark';
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+
+    if (theme === 'light') {
+      document.documentElement.classList.add('light');
+      sunIcon?.classList.add('hidden');
+      moonIcon?.classList.remove('hidden');
+    } else {
+      document.documentElement.classList.remove('light');
+      sunIcon?.classList.remove('hidden');
+      moonIcon?.classList.add('hidden');
+    }
+  }
+
+  // Ejecutar al cargar
+  applyTheme();
+
+  // Configurar el evento de click de forma segura
+  document.addEventListener('DOMContentLoaded', () => {
+    const button = document.getElementById('themeToggle');
+    if (button) {
+      button.addEventListener('click', () => {
+        const isLight = document.documentElement.classList.contains('light');
+        const newTheme = isLight ? 'dark' : 'light';
+        
+        localStorage.setItem('theme', newTheme);
+        applyTheme();
+      });
+    }
+  });
+
+  // Esto es para que funcione con las transiciones de página de Astro (View Transitions)
+  document.addEventListener('astro:after-swap', applyTheme);
+</script>
+
+<style>
+  #themeToggle:hover {
+    box-shadow: 0 0 20px rgba(220, 239, 66, 0.15);
+  }
+</style>

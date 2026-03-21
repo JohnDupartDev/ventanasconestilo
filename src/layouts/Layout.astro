@@ -1,23 +1,149 @@
+---
+import Header from "../components/Header.astro";
+import '../styles/global.css'; 
+
+const { 
+  title = "Cortinas & Persianas Zipaquirá | Venta, Instalación y Mantenimiento", 
+  description = "Expertos en cortinas y persianas en Zipaquirá y Sabana Centro. Venta, instalación y mantenimiento con 5 años de garantía. ¡Asesoría personalizada!",
+  url = "https://ventanasconestilo.com", 
+  image = "/og-image-persianas.jpg" 
+} = Astro.props;
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "HomeGoodsStore", 
+  "name": "Cortinas & Persianas",
+  "image": "https://ventanasconestilo.com/logo.png",
+  "@id": "https://ventanasconestilo.com",
+  "url": "https://ventanasconestilo.com",
+  "telephone": "+573143292821",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Carrera 31a # 12a -11",
+    "addressLocality": "Zipaquirá",
+    "addressRegion": "Cundinamarca",
+    "postalCode": "250251",
+    "addressCountry": "CO"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 5.019, 
+    "longitude": -73.997
+  },
+  "areaServed": {
+    "@type": "GeoCircle",
+    "geoMidpoint": {
+      "@type": "GeoCoordinates",
+      "latitude": 5.023,
+      "longitude": -74.003
+    },
+    "geoRadius": "20000" 
+  },
+  "award": "5 años de garantía en todos nuestros productos",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "opens": "08:00",
+    "closes": "18:00"
+  }
+};
+---
+
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="generator" content={Astro.generator} />
+
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={url} />
+        <meta name="robots" content="index, follow" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={url} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={new URL(image, Astro.url)} />
+        <meta property="og:locale" content="es_CO" />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content={title} />
+        <meta property="twitter:description" content={description} />
+
+        <meta name="author" content="Cortinas & Persianas" />
+        <meta name="geo.region" content="CO-CUN" />
+        <meta name="geo.placename" content="Zipaquirá" />
+        <meta name="keywords" content="cortinas zipaquira, persianas sabana centro, mantenimiento de cortinas, instalacion persianas, garantia 5 años" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Plus+Jakarta+Sans:wght@700;800&family=Space+Grotesk:wght@700;900&display=swap" rel="stylesheet">
+
+        <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+
+        <script is:inline>
+            const getTheme = () => {
+              if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+                return localStorage.getItem('theme');
+              }
+              return 'dark';
+            };
+
+            const setTheme = (theme) => {
+              if (theme === 'light') {
+                document.documentElement.classList.add('light');
+              } else {
+                document.documentElement.classList.remove('light');
+              }
+              localStorage.setItem('theme', theme);
+            };
+
+            // Aplicar inmediatamente al cargar
+            setTheme(getTheme());
+
+            // Escuchar cambios en el DOM para asegurar que el tema persiste en navegaciones
+            document.addEventListener('astro:after-swap', () => setTheme(getTheme()));
+        </script>
+    </head>
+    <body class="bg-surface text-on-surface antialiased selection:bg-primary selection:text-on-primary">
+        <Header />
+        <slot />
+    </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  /* 1. Definición de variables puras */
+  :root {
+    --bg-page: #131313;
+    --text-page: #e2e2e2;
+    --bg-card: #1f1f1f;
+    --border-color: rgba(70, 72, 52, 0.15);
+  }
+
+  /* 2. Inversión total en modo claro */
+  :root.light {
+    --bg-page: #f2f2f2;
+    --text-page: #1a1a1a;
+    --bg-card: #ffffff;
+    --border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  /* 3. Aplicación forzada (El secreto para que funcione) */
+  html, body {
+    background-color: var(--bg-page) !important;
+    color: var(--text-page) !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Clases de utilidad manuales para tus componentes */
+  .bg-surface { background-color: var(--bg-page) !important; }
+  .bg-surface-container { background-color: var(--bg-card) !important; }
+  .text-on-surface { color: var(--text-page) !important; }
+  .border-outline-variant { border-color: var(--border-color) !important; }
 </style>

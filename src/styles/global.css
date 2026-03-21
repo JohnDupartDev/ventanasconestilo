@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* MODO OSCURO (Default) */
+    --color-surface: 19, 19, 19; /* #131313 */
+    --color-surface-lowest: 14, 14, 14; /* #0e0e0e */
+    --color-surface-container: 31, 31, 31; /* #1f1f1f */
+    --color-surface-container-high: 42, 42, 42; /* #2a2a2a */
+    --color-on-surface: 226, 226, 226; /* #e2e2e2 */
+    --color-outline-variant: 70, 72, 52;
+  }
+
+  :root.light {
+    /* MODO CLARO */
+    --color-surface: 242, 242, 242; /* #f2f2f2 */
+    --color-surface-lowest: 255, 255, 255; /* #ffffff */
+    --color-surface-container: 255, 255, 255; /* #ffffff */
+    --color-surface-container-high: 224, 224, 224; /* #e0e0e0 */
+    --color-on-surface: 26, 26, 26; /* #1a1a1a */
+    --color-outline-variant: 0, 0, 0;
+  }
+
+  html {
+    background-color: rgb(var(--color-surface));
+    color: rgb(var(--color-on-surface));
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
