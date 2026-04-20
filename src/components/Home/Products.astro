@@ -4,27 +4,32 @@ const products = [
     {
         title: "Panel Japonés",
         desc: "Ideal para grandes ventanales y divisiones de ambientes con un toque minimalista.",
-        img: "/images/panel-japoness-zipaquira.jpg"
+        img: "/images/panel-japoness-zipaquira.jpg",
+        link: "/productos/persianas-panel-japones"
     },
     {
         title: "Sheer Elegance",
         desc: "El equilibrio perfecto entre visibilidad y privacidad con un diseño vanguardista.",
-        img: "/images/cortinas-sheer-elegance-zipaquira.jpg"
+        img: "/images/cortinas-sheer-elegance-zipaquira.jpg",
+        link: "/productos/cortinas-sheer-elegance"
     },
     {
         title: "Cortinas Romanas",
         desc: "Elegancia clásica con pliegues perfectos y una amplia variedad de texturas textiles.",
-        img: "/images/cortinas-romanas-zipaquira.jpg"
+        img: "/images/cortinas-romanas-zipaquira.jpg",
+        link: "/#"
     },
     {
         title: "Enrollables",
         desc: "Simplicidad y funcionalidad extrema. Control solar eficiente con un diseño limpio.",
-        img: "/images/cortinas-enrollables-zipaquira.jpg"
+        img: "/images/cortinas-enrollables-zipaquira.jpg",
+        link: "/#"
     },
     {
         title: "Blackout",
         desc: "Oscuridad total y privacidad máxima. La solución definitiva para un descanso profundo.",
-        img: "/images/cortinas-black-out-zipaquira.jpg"
+        img: "/images/cortinas-black-out-zipaquira.jpg",
+        link: "/#"
     }
 ];
 ---
@@ -40,10 +45,10 @@ const products = [
                     Selección premium para arquitecturas modernas en Zipaquirá.
                 </p>
             </div>
-            <a href="https://wa.me/573143292821" class="hidden md:flex items-center gap-3 text-[#dcef42] font-['Plus_Jakarta_Sans'] font-black text-[10px] uppercase tracking-[0.3em] group shrink-0">
+            <a href="/productos" class="hidden md:flex items-center gap-3 text-[#dcef42] font-['Plus_Jakarta_Sans'] font-black text-[10px] uppercase tracking-[0.3em] group shrink-0">
                 Ver todos
                 <span class="w-10 h-10 rounded-full border border-[#dcef42]/20 flex items-center justify-center group-hover:bg-[#dcef42] group-hover:text-[#2e3300] transition-all duration-500">
-                    <span class="material-icons-outlined">arrow_forward</span>
+                    <span class="material-symbols-outlined">arrow_forward</span>
                 </span>
             </a>
         </div>
@@ -71,7 +76,7 @@ const products = [
                                     {product.desc}
                                 </p>
                                 <a 
-                                    href="https://wa.me/573143292821?text=Hola,%20queremos%20información%20sobre%20sus%20servicios" 
+                                    href={product.link} 
                                     class="inline-flex items-center gap-2 text-[#dcef42] font-['Plus_Jakarta_Sans'] font-black text-[10px] uppercase tracking-widest group/btn mt-auto"
                                 >
                                     Saber más 
