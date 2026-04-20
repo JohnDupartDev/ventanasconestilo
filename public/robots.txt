@@ -1,0 +1,50 @@
+# ==========================================
+# ROBOTS.TXT - Ventanas con Estilo
+# ==========================================
+
+# 1. RASTREADORES ESTÁNDAR Y PROTECCIÓN SEO
+User-agent: *
+Allow: /
+# Bloqueamos rutas internas o de errores para no afectar la calificación SEO
+Disallow: /api/
+Disallow: /404
+# Bloqueamos URLs con parámetros dinámicos (ej. ?color=rojo) para evitar penalizaciones por contenido duplicado
+Disallow: /*?* # 2. INTELIGENCIA ARTIFICIAL Y LLMs (Optimización AEO)
+# Permisos explícitos extendidos para que todas las IAs principales lean tu catálogo y te recomienden
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Omgilibot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# 3. BLOQUEO DE BOTS INNECESARIOS (Ahorro de ancho de banda)
+# Al ser un negocio local en Sabana Centro, bloqueamos buscadores de Asia y Rusia
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /
+
+User-agent: Sogou
+Disallow: /
+
+# 4. MAPAS DEL SITIO Y ARCHIVOS CLAVE
+Sitemap: https://ventanasconestilo.com/sitemap.xml

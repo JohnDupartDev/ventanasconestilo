@@ -3,88 +3,140 @@ import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import '../styles/global.css'; 
 
+/**
+ * PROPS DEL LAYOUT
+ * Se incluyen valores por defecto optimizados para SEO local.
+ */
 const { 
-  title = "Cortinas & Persianas Zipaquirá | Venta, Instalación y Mantenimiento", 
-  description = "Expertos en cortinas y persianas en Zipaquirá y Sabana Centro. Venta, instalación y mantenimiento con 5 años de garantía. ¡Asesoría personalizada!",
+  title = "Ventanas con Estilo | Cortinas & Persianas en Zipaquirá y Sabana Centro", 
+  description = "Especialistas en venta, instalación y mantenimiento de cortinas Sheer Elegance, Panel Japonés y persianas. + 6 años de garantía y visita técnica gratuita en Zipaquirá, Chía y Cajicá.",
   url = "https://ventanasconestilo.com", 
-  image = "/og-image-persianas.jpg" 
+  image = "/images/og-ventanas-con-estilo.jpg", // Ruta recomendada para la imagen OG
+  canonical = Astro.url.href
 } = Astro.props;
 
+/**
+ * SCHEMA.ORG - JSON-LD ROBUSTO (SEO & AEO)
+ * Combinación de LocalBusiness y Service para máxima visibilidad en búsquedas y asistentes de IA.
+ */
 const schemaData = {
   "@context": "https://schema.org",
-  "@type": "HomeGoodsStore", 
-  "name": "Cortinas & Persianas",
-  "image": "https://ventanasconestilo.com/logo.png",
-  "@id": "https://ventanasconestilo.com",
-  "url": "https://ventanasconestilo.com",
-  "telephone": "+573143292821",
-  "priceRange": "$$",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Carrera 31a # 12a -11",
-    "addressLocality": "Zipaquirá",
-    "addressRegion": "Cundinamarca",
-    "postalCode": "250251",
-    "addressCountry": "CO"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 5.019, 
-    "longitude": -73.997
-  },
-  "areaServed": {
-    "@type": "GeoCircle",
-    "geoMidpoint": {
-      "@type": "GeoCoordinates",
-      "latitude": 5.023,
-      "longitude": -74.003
+  "@graph": [
+    {
+      "@type": "HomeAndConstructionBusiness",
+      "@id": "https://ventanasconestilo.com/#organization",
+      "name": "Ventanas con Estilo",
+      "url": "https://ventanasconestilo.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://ventanasconestilo.com/logo.png",
+        "width": "512",
+        "height": "512"
+      },
+      "image": "https://ventanasconestilo.com/images/hero-home.jpg",
+      "description": "Expertos en diseño, instalación y mantenimiento de cortinas y persianas premium en la Sabana de Bogotá.",
+      "telephone": "+573208374532",
+      "email": "contacto@ventanasconestilo.com",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Carrera 19 # 17 - 22", // Dirección consolidada
+        "addressLocality": "Zipaquirá",
+        "addressRegion": "Cundinamarca",
+        "postalCode": "250251",
+        "addressCountry": "CO"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 5.019, 
+        "longitude": -73.997
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=100091404444825",
+        "https://www.instagram.com/ventanasconestilo/",
+        "https://www.tiktok.com/@ventanas_con_estilo"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+573208374532",
+        "contactType": "sales",
+        "areaServed": ["Zipaquirá", "Chía", "Cajicá", "Sopó", "Tocancipá"],
+        "availableLanguage": "Spanish"
+      }
     },
-    "geoRadius": "20000" 
-  },
-  "award": "5 años de garantía en todos nuestros productos",
-  "openingHoursSpecification": {
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-    "opens": "08:00",
-    "closes": "18:00"
-  }
+    {
+      "@type": "Service",
+      "serviceType": "Instalación de Cortinas y Persianas",
+      "provider": { "@id": "https://ventanasconestilo.com/#organization" },
+      "areaServed": {
+        "@type": "State",
+        "name": "Cundinamarca"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Catálogo de Cortinas",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cortinas Sheer Elegance" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Panel Japonés" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Persianas Enrollables" } }
+        ]
+      }
+    }
+  ]
 };
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="generator" content={Astro.generator} />
+        <meta name="theme-color" content="#131313" />
 
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
         <title>{title}</title>
         <meta name="description" content={description} />
-        <link rel="canonical" href={url} />
-        <meta name="robots" content="index, follow" />
-
+        <link rel="canonical" href={canonical} />
+        
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow" />
+        
         <meta property="og:type" content="website" />
         <meta property="og:url" content={url} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={new URL(image, Astro.url)} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:locale" content="es_CO" />
+        <meta property="og:site_name" content="Ventanas con Estilo" />
 
         <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={url} />
         <meta property="twitter:title" content={title} />
         <meta property="twitter:description" content={description} />
+        <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-        <meta name="author" content="Cortinas & Persianas" />
         <meta name="geo.region" content="CO-CUN" />
         <meta name="geo.placename" content="Zipaquirá" />
-        <meta name="keywords" content="cortinas zipaquira, persianas sabana centro, mantenimiento de cortinas, instalacion persianas, garantia 5 años" />
+        <meta name="geo.position" content="5.019;-73.997" />
+        <meta name="ICBM" content="5.019, -73.997" />
+
+        <meta name="keywords" content="cortinas sheer elegance zipaquira, persianas panel japones chia, instalacion de cortinas cajica, mantenimiento de persianas sopo, persianas modernas sabana centro, ventanas con estilo, cortinas a medida cundinamarca" />
+        <meta name="author" content="Ventanas con Estilo" />
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Plus+Jakarta+Sans:wght@700;800&family=Space+Grotesk:wght@700;900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet" />
 
         <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
 
@@ -105,18 +157,30 @@ const schemaData = {
               localStorage.setItem('theme', theme);
             };
 
-            // Aplicar inmediatamente al cargar
             setTheme(getTheme());
-
-            // Escuchar cambios en el DOM para asegurar que el tema persiste en navegaciones
             document.addEventListener('astro:after-swap', () => setTheme(getTheme()));
         </script>
+
+        <slot name="head" />
     </head>
     <body class="bg-surface text-on-surface antialiased selection:bg-primary selection:text-on-primary">
         <Header />
-        <slot />
+        
+        <main id="main-content">
+            <slot />
+        </main>
+
+        <Footer />
+        
+        <a 
+          href="https://wa.me/573208374532?text=Hola,%20quisiera%20agendar%20una%20visita%20técnica." 
+          class="fixed bottom-6 right-6 z-[999] bg-[#25d366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center"
+          aria-label="Contactar por WhatsApp"
+          target="_blank"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.588-5.946 0-6.556 5.332-11.888 11.888-11.888 3.176 0 6.164 1.236 8.41 3.483 2.247 2.247 3.483 5.234 3.483 8.41 0 6.556-5.332 11.89-11.888 11.89-2.015 0-3.991-.511-5.741-1.486l-6.251 1.64zm6.79-3.363l.356.211c1.477.878 3.185 1.342 4.933 1.342 5.378 0 9.756-4.378 9.756-9.756 0-2.604-1.013-5.052-2.853-6.892-1.841-1.841-4.288-2.854-6.891-2.854-5.378 0-9.756 4.378-9.756 9.756 0 1.831.511 3.616 1.479 5.15l.233.372-1.003 3.666 3.76-.988z"/></svg>
+        </a>
     </body>
-    <Footer />
 </html>
 
 <style is:global>
@@ -126,26 +190,56 @@ const schemaData = {
     --text-page: #e2e2e2;
     --bg-card: #1f1f1f;
     --border-color: rgba(70, 72, 52, 0.15);
+    --primary: #dcef42; /* Color Lima Marca */
   }
 
   /* 2. Inversión total en modo claro */
   :root.light {
-    --bg-page: #f2f2f2;
-    --text-page: #1a1a1a;
+    --bg-page: #f9f9f9;
+    --text-page: #131313;
     --bg-card: #ffffff;
-    --border-color: rgba(0, 0, 0, 0.1);
+    --border-color: rgba(0, 0, 0, 0.08);
   }
 
-  /* 3. Aplicación forzada (El secreto para que funcione) */
+  /* 3. Estilos Base */
   html, body {
     background-color: var(--bg-page) !important;
     color: var(--text-page) !important;
     transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: 'Inter', sans-serif;
   }
 
-  /* Clases de utilidad manuales para tus componentes */
+  h1, h2, h3, h4 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  /* Clases de utilidad manuales */
   .bg-surface { background-color: var(--bg-page) !important; }
   .bg-surface-container { background-color: var(--bg-card) !important; }
   .text-on-surface { color: var(--text-page) !important; }
   .border-outline-variant { border-color: var(--border-color) !important; }
+
+  /* Personalización de Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-page);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+  }
+
+  /* Soporte para no-scrollbar */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 </style>
