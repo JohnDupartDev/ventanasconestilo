@@ -1,0 +1,77 @@
+---
+import ContactForm from '../components/Servicios.astro/ContactForm.astro';
+import ServicesGrid from '../components/Servicios.astro/ServicesGrid.astro';
+import ServicesHero from '../components/Servicios.astro/ServicesHero.astro';
+import WhyVCE from '../components/Servicios.astro/WhyVCE.astro';
+import Layout from '../layouts/Layout.astro';
+
+/** * SEO & GEO Optimization - Servicios Especializados */
+const title = "Venta, Instalación y Mantenimiento de Cortinas en Zipaquirá";
+const description = "Expertos en cortinas y persianas en Zipaquirá y Sabana Centro. Servicios profesionales de venta, instalación técnica y mantenimiento preventivo.";
+
+const canonicalURL = Astro.site 
+  ? new URL(Astro.url.pathname, Astro.site) 
+  : Astro.url.pathname;
+
+---
+
+<Layout title={title} description={description}>
+  {Astro.site && <link rel="canonical" href={canonicalURL} slot="head" />}
+  
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Instalación y Mantenimiento de Cortinas",
+      "name": "Servicios de Cortinas y Persianas en Zipaquirá",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Ventanas con Estilo",
+        "address": {
+          "@type": "PostalAddress",
+            "streetAddress": "Zona Zipaquirá, Sabana Centro",
+          "addressLocality": "Zipaquirá",
+          "addressRegion": "Cundinamarca",
+         "addressCountry": "CO"
+
+        }
+      },
+      "areaServed": ["Zipaquirá", "Chía", "Cajicá", "Sopo", "Tocanzipá", "Tabio", "Nemocón"],
+    "knowsAbout": ["Cortinas", "Persianas", "Control solar", "Ahorro energético", "cortinas cerca de mi"]
+
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Ventanas con Estilo",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Venta de Cortinas" }},
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Instalación de Persianas" }},
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mantenimiento de Cortinas" }}
+        ]
+      }
+    }
+  </script>
+
+  <main class="bg-[#0e0e0e] pt-32">
+  <ServicesHero />
+  <ServicesGrid />
+  <WhyVCE />
+  <ContactForm />
+
+
+
+  </main>
+</Layout>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0', 'translate-y-8');
+        entry.target.classList.add('opacity-100', 'translate-y-0');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>

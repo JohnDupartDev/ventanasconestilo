@@ -1,0 +1,98 @@
+---
+/* src/components/Products.astro */
+const products = [
+    {
+        title: "Panel Japonés",
+        desc: "Ideal para grandes ventanales y divisiones de ambientes con un toque minimalista.",
+        img: "/images/panel-japoness-zipaquira.jpg"
+    },
+    {
+        title: "Sheer Elegance",
+        desc: "El equilibrio perfecto entre visibilidad y privacidad con un diseño vanguardista.",
+        img: "/images/cortinas-sheer-elegance-zipaquira.jpg"
+    },
+    {
+        title: "Cortinas Romanas",
+        desc: "Elegancia clásica con pliegues perfectos y una amplia variedad de texturas textiles.",
+        img: "/images/cortinas-romanas-zipaquira.jpg"
+    },
+    {
+        title: "Enrollables",
+        desc: "Simplicidad y funcionalidad extrema. Control solar eficiente con un diseño limpio.",
+        img: "/images/cortinas-enrollables-zipaquira.jpg"
+    },
+    {
+        title: "Blackout",
+        desc: "Oscuridad total y privacidad máxima. La solución definitiva para un descanso profundo.",
+        img: "/images/cortinas-black-out-zipaquira.jpg"
+    }
+];
+---
+
+<section id="productos" class="py-16 bg-[#0e0e0e] overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-end  gap-6 reveal opacity-0 translate-y-8 transition-all duration-1000">
+            <div class="max-w-xl">
+                <h2 class="text-4xl md:text-5xl font-['Space_Grotesk'] font-black text-white mb-4 tracking-tighter uppercase leading-none">
+                    Nuestros <span class="text-[#dcef42] italic">Productos</span>
+                </h2>
+                <p class="text-white/50 text-base md:text-lg font-sans italic">
+                    Selección premium para arquitecturas modernas en Zipaquirá.
+                </p>
+            </div>
+            <a href="https://wa.me/573143292821" class="hidden md:flex items-center gap-3 text-[#dcef42] font-['Plus_Jakarta_Sans'] font-black text-[10px] uppercase tracking-[0.3em] group shrink-0">
+                Ver todos
+                <span class="w-10 h-10 rounded-full border border-[#dcef42]/20 flex items-center justify-center group-hover:bg-[#dcef42] group-hover:text-[#2e3300] transition-all duration-500">
+                    <span class="material-icons-outlined">arrow_forward</span>
+                </span>
+            </a>
+        </div>
+
+        <div class="reveal opacity-0 translate-y-12 transition-all duration-1000 delay-200">
+            <div class="flex overflow-x-auto pb-8 gap-4 lg:gap-6 snap-x snap-mandatory no-scrollbar scroll-smooth outline-none">
+                {products.map((product) => (
+                    <div class="flex-none w-[88%] sm:w-[60%] md:w-[45%] lg:w-[31%] snap-center group h-auto">
+                        <div class="bg-[#1f1f1f] rounded-[2rem] overflow-hidden border border-white/5 transition-all duration-500 hover:border-[#dcef42]/30  h-full flex flex-col">
+                            
+                            <div class="h-64 lg:h-72 overflow-hidden relative shrink-0">
+                                <img 
+                                    src={product.img} 
+                                    alt={product.title} 
+                                    class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110   md:opacity-60 md:group-hover:opacity-100"
+                                />
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#1f1f1f] via-transparent to-transparent opacity-60"></div>
+                            </div>
+                            
+                            <div class="p-4 lg:p-8 flex flex-col flex-grow">
+                                <h3 class="text-2xl font-['Space_Grotesk'] font-black text-white mb-3 uppercase tracking-tighter">
+                                    {product.title}
+                                </h3>
+                                <p class="text-white/40 text-sm font-sans mb-4 lg:mb-8 leading-relaxed italic flex-grow">
+                                    {product.desc}
+                                </p>
+                                <a 
+                                    href="https://wa.me/573143292821?text=Hola,%20queremos%20información%20sobre%20sus%20servicios" 
+                                    class="inline-flex items-center gap-2 text-[#dcef42] font-['Plus_Jakarta_Sans'] font-black text-[10px] uppercase tracking-widest group/btn mt-auto"
+                                >
+                                    Saber más 
+                                    <span class="text-lg group-hover/btn:translate-x-1 transition-transform">→</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Ocultar barra de scroll */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>

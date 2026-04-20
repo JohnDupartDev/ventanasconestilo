@@ -2,92 +2,132 @@
 // src/components/Header.astro
 
 const navItems = [
-  { name: 'Inicio', url: '#inicio' },
-  { name: 'Productos', url: '#productos' },
-  { name: 'Servicios', url: '#servicios' },
-  { name: 'Garantía', url: '#garantia' },
-  { name: 'Contacto', url: '#contacto' }
+  { name: 'Inicio', url: '/' },
+   { name: 'Nosotros', url: 'nosotros' },
+  { 
+    name: 'Productos', 
+    url: '/productos',
+    submenu: [
+      { name: 'Sheer Elegance', url: '/productos#japones' },
+      { name: 'Black Out', url: '/productos#sheer' },
+      { name: 'Panel Japonés', url: '/productos#japones' },
+      { name: 'Enrollables', url: '/productos#sheer' },
+      { name: 'Romanas', url: '/productos#sheer' }
+    ]
+  },
+  { name: 'Servicios', url: 'servicios' },
+  { name: 'Contacto', url: 'contacto' }
 ];
 ---
 
 <header id="header-wrapper" class="fixed top-0 left-0 w-full z-[100] px-4 py-6 transition-all duration-500">
-  <div class="max-w-6xl mx-auto">
-    <nav id="nav-container" class="bg-surface/60 backdrop-blur-xl rounded-full px-6 sm:px-10 border border-outline-variant/10 flex items-center justify-between transition-all duration-500 min-h-[70px] shadow-2xl shadow-black/50">
+  <div class="max-w-7xl mx-auto">
+    <nav id="nav-container" class="bg-[#0e0e0e]/60 backdrop-blur-xl rounded-full px-6 sm:px-8 border border-white/10 flex items-center justify-between transition-all duration-500 h-20 shadow-2xl shadow-black/50">
       
       <a href="/" class="flex items-center shrink-0 group" aria-label="Inicio - Ventanas con Estilo">
-    
-    <img 
-      src="/logo.svg" 
-      alt="Logo Ventanas con Estilo" 
-      class="w-auto h-16 object-contain filter-primary group-hover:brightness-110"
-      onload="this.style.opacity = 1"
-      style="opacity: 0; transition: opacity 0.5s ease"
-    />
+        <img 
+          src="/logo.svg" 
+          alt="Logo Ventanas con Estilo" 
+          class="w-auto h-14 md:h-16 object-contain group-hover:brightness-110 transition-all"
+          onload="this.style.opacity = 1"
+          style="opacity: 0; transition: opacity 0.5s ease"
+        />
+      </a>
 
-</a>
-
-      <ul class="hidden md:flex items-center gap-8 text-[10px] font-label font-black uppercase tracking-[0.15em] text-on-surface/50">
+      <ul class="hidden md:flex items-center gap-8 text-[12px] font-['Plus_Jakarta_Sans'] font-black uppercase tracking-[0.2em] text-white/50">
         {navItems.map(item => (
-          <li>
-            <a href={item.url} class="hover:text-primary transition-colors duration-300 py-2">
+          <li class="relative group/item py-8">
+            <a href={item.url} class="hover:text-[#dcef42] transition-colors duration-300 py-2 flex items-center gap-1">
               {item.name}
+              {item.submenu && <span class="material-icons-outlined text-[12px] transition-transform group-hover/item:rotate-180">expand_more</span>}
             </a>
+            
+            {item.submenu && (
+              <ul class="absolute top-[100%] left-1/2 -translate-x-1/2 w-48 bg-[#131313] backdrop-blur-2xl border border-white/5 rounded-2xl p-2 opacity-0 invisible translate-y-2 group-hover/item:opacity-100 group-hover/item:visible group-hover/item:translate-y-0 transition-all duration-300 shadow-2xl">
+                {item.submenu.map(sub => (
+                  <li>
+                    <a href={sub.url} class="block px-4 py-3 rounded-xl text-[11px] hover:bg-[#dcef42] hover:text-[#2e3300] transition-all duration-300">
+                      {sub.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </li>
         ))}
       </ul>
 
       <div class="hidden sm:flex items-center gap-6">
-  <a 
-    href="https://wa.me/573143292821?text=Hola,%20queremos%20información%20sobre%20sus%20servicios" 
-    target="_blank"
-    class="bg-[#dcef42] text-[#2e3300] px-8 py-3 rounded-full text-[10px] font-label font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-[0_0_20px_rgba(220,239,66,0.4)] hover:shadow-[0_0_30px_rgba(220,239,66,0.6)] border border-[#dcef42]/20"
-  >
-    ASESORÍA
-  </a>
-</div>
-      <button id="open-menu" class="md:hidden flex flex-col gap-1.5 p-2 group" aria-label="Abrir menú">
-        <span class="w-6 h-0.5 bg-primary rounded-full group-active:translate-x-1 transition-transform"></span>
-        <span class="w-4 h-0.5 bg-primary rounded-full self-end transition-transform"></span>
+        <a 
+          href="https://wa.me/573208374532?text=Hola,%20queremos%20información%20sobre%20sus%20servicios" 
+          target="_blank"
+          class="bg-[#dcef42] text-[#2e3300] px-6 py-2.5 rounded-full text-[9px] font-['Plus_Jakarta_Sans'] font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-lg shadow-[#dcef42]/20 border border-[#dcef42]/20"
+        >
+          ASESORÍA
+        </a>
+      </div>
+
+      <button id="open-menu" class="md:hidden flex flex-col gap-1 p-2 group" aria-label="Abrir menú">
+        <span class="w-5 h-0.5 bg-[#dcef42] rounded-full transition-all group-active:w-6"></span>
+        <span class="w-3 h-0.5 bg-[#dcef42] rounded-full self-end transition-all group-active:w-6"></span>
       </button>
     </nav>
   </div>
 
   <div id="mobile-sidebar" class="fixed inset-0 z-[200] hidden">
-    <div id="sidebar-overlay" class="absolute inset-0 bg-surface-lowest/90 backdrop-blur-md opacity-0 transition-opacity duration-500"></div>
+    <div id="sidebar-overlay" class="absolute inset-0 bg-[#0e0e0e]/95 backdrop-blur-lg opacity-0 transition-opacity duration-500"></div>
     
-    <div id="sidebar-panel" class="absolute top-0 right-0 h-full w-[85%] max-w-sm bg-surface-container border-l border-outline-variant/10 flex flex-col translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+    <div id="sidebar-panel" class="absolute top-0 right-0 h-full w-[85%] max-w-[320px] bg-[#131313] border-l border-white/5 flex flex-col translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-2xl">
       
-      <div class="flex justify-between items-center p-8 border-b border-outline-variant/5">
-        <span class="font-display font-black text-primary tracking-tighter text-2xl italic">CP</span>
-        <button id="close-menu" class="text-on-surface/40 hover:text-primary font-label text-xs tracking-widest uppercase">
-          CERRAR 
+      <div class="flex justify-between items-center p-8 border-b border-white/5">
+        <span class="font-['Space_Grotesk'] font-black text-[#dcef42] tracking-tighter text-xl italic uppercase">Menu</span>
+        <button id="close-menu" class="text-white/40 hover:text-[#dcef42] font-['Plus_Jakarta_Sans'] text-[9px] tracking-[0.3em] uppercase border border-white/10 px-3 py-1.5 rounded-full transition-all">
+          Cerrar 
         </button>
       </div>
 
-      <nav class="flex-1 px-4 py-10">
-        <ul class="flex flex-col gap-1">
+      <nav class="flex-1 px-4 py-10 overflow-y-auto">
+        <ul class="flex flex-col gap-2">
           {navItems.map(item => (
-            <li>
-              <a href={item.url} class="mobile-link group text-3xl font-display font-bold text-on-surface hover:text-primary flex items-center justify-between py-5 px-6 rounded-2xl transition-all">
-                <span>{item.name}</span>
-                <span class="text-primary opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-              </a>
+            <li class="mobile-item">
+              {item.submenu ? (
+                <div class="flex flex-col">
+                  <button class="mobile-link submenu-trigger group text-xl font-['Space_Grotesk'] font-bold text-white/70 hover:text-[#dcef42] flex items-center justify-between py-4 px-6 rounded-2xl transition-all">
+                    <span>{item.name}</span>
+                    <span class="material-icons-outlined transition-transform duration-300 icon-arrow">expand_more</span>
+                  </button>
+                  <ul class="submenu-content max-h-0 overflow-hidden transition-all duration-500 bg-white/[0.02] rounded-2xl mx-4">
+                    {item.submenu.map(sub => (
+                      <li>
+                        <a href={sub.url} class="block py-4 px-8 text-sm font-['Plus_Jakarta_Sans'] text-white/40 hover:text-[#dcef42]">
+                          {sub.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <a href={item.url} class="mobile-link group text-xl font-['Space_Grotesk'] font-bold text-white/70 hover:text-[#dcef42] flex items-center justify-between py-4 px-6 rounded-2xl transition-all hover:bg-white/[0.02]">
+                  <span>{item.name}</span>
+                  <span class="text-[#dcef42] opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">→</span>
+                </a>
+              )}
             </li>
           ))}
         </ul>
       </nav>
 
-      <div class="p-8 border-t border-outline-variant/5 space-y-8 bg-surface-lowest/30">
-        <div class="flex justify-between items-center">
-            <span class="font-label text-[10px] text-on-surface/30 tracking-[0.2em] uppercase">Social / 2026</span>
+      <div class="p-8 border-t border-white/5 space-y-6 bg-[#0e0e0e]/50">
+        <div class="flex justify-between items-center px-2">
+            <span class="font-['Plus_Jakarta_Sans'] text-[9px] text-white/20 tracking-[0.3em] uppercase">Ventanería Técnica</span>
         </div>
         
         <div class="flex flex-col gap-3">
-            <a href="https://wa.me/573195301551" target="_blank" class="block w-full bg-primary-gradient text-on-primary text-center py-5 rounded-xl font-label font-black text-xs tracking-widest uppercase shadow-2xl shadow-primary/20">
+            <a href="https://wa.me/573208374532" target="_blank" class="block w-full bg-[#dcef42] text-[#2e3300] text-center py-4 rounded-xl font-['Plus_Jakarta_Sans'] font-black text-[10px] tracking-widest uppercase shadow-xl shadow-[#dcef42]/5 active:scale-95 transition-all">
                 AGENDAR ASESORÍA
             </a>
-            <p class="text-center text-[9px] font-label text-on-surface/20 tracking-widest uppercase">
-                Venta · Instalación · Mantenimiento
+            <p class="text-center text-[8px] font-['Plus_Jakarta_Sans'] text-white/20 tracking-[0.2em] uppercase">
+                Zipaquirá · Sabana Centro · 2026
             </p>
         </div>
       </div>
@@ -96,6 +136,8 @@ const navItems = [
 </header>
 
 <script>
+  import { animate, scroll } from "motion";
+
   const headerWrapper = document.getElementById('header-wrapper');
   const navContainer = document.getElementById('nav-container');
   const openBtn = document.getElementById('open-menu');
@@ -103,22 +145,46 @@ const navItems = [
   const sidebar = document.getElementById('mobile-sidebar');
   const overlay = document.getElementById('sidebar-overlay');
   const panel = document.getElementById('sidebar-panel');
-  const mobileLinks = document.querySelectorAll('.mobile-link');
+  const mobileLinks = document.querySelectorAll('.mobile-link:not(.submenu-trigger)');
+  const submenuTriggers = document.querySelectorAll('.submenu-trigger');
 
+  // Reducción de header al hacer scroll
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      headerWrapper?.classList.replace('py-6', 'py-2');
-      // Al hacer scroll, reforzamos el fondo dinámico
-      navContainer?.classList.add('bg-surface/95', 'shadow-xl');
+    if (window.scrollY > 40) {
+      headerWrapper?.classList.replace('py-6', 'py-3');
+      navContainer?.classList.add('bg-[#0e0e0e]/95', 'shadow-2xl');
+      navContainer?.classList.replace('min-h-[80px]', 'min-h-[70px]');
     } else {
-      headerWrapper?.classList.replace('py-2', 'py-6');
-      navContainer?.classList.remove('bg-surface/95', 'shadow-xl');
+      headerWrapper?.classList.replace('py-3', 'py-6');
+      navContainer?.classList.remove('bg-[#0e0e0e]/95', 'shadow-2xl');
+      navContainer?.classList.replace('min-h-[70px]', 'min-h-[80px]');
     }
+  });
+
+  // Lógica Submenú Móvil
+submenuTriggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      // Forzamos el tipo a HTMLElement para poder acceder a .style y .scrollHeight
+      const content = trigger.nextElementSibling as HTMLElement;
+      const arrow = trigger.querySelector('.icon-arrow') as HTMLElement;
+      
+      const isOpen = content.style.maxHeight !== '0px' && content.style.maxHeight !== '';
+      
+      if (content) {
+        content.style.maxHeight = isOpen ? '0px' : `${content.scrollHeight}px`;
+      }
+      
+      if (arrow) {
+        arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+      }
+    });
   });
 
   const openMenu = () => {
     sidebar?.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
+    document.body.style.touchAction = 'none';
+    
     setTimeout(() => {
       overlay?.classList.replace('opacity-0', 'opacity-100');
       panel?.classList.replace('translate-x-full', 'translate-x-0');
@@ -128,30 +194,40 @@ const navItems = [
   const closeMenu = () => {
     overlay?.classList.replace('opacity-100', 'opacity-0');
     panel?.classList.replace('translate-x-0', 'translate-x-full');
+    
     setTimeout(() => {
       sidebar?.classList.add('hidden');
       document.body.style.overflow = '';
+      document.body.style.touchAction = '';
     }, 500);
   };
 
   openBtn?.addEventListener('click', openMenu);
   closeBtn?.addEventListener('click', closeMenu);
   overlay?.addEventListener('click', closeMenu);
-  mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+  
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      closeMenu();
+    });
+  });
 </script>
 
 <style is:global>
-  .translate-x-0 .mobile-link {
-    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  /* Animación de entrada de los links */
+  #sidebar-panel[class*="translate-x-0"] .mobile-item {
+    animation: slideUpIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     opacity: 0;
   }
-  @keyframes slideUp {
-    from { transform: translateY(20px); opacity: 0; }
+
+  @keyframes slideUpIn {
+    from { transform: translateY(15px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
   }
-  .mobile-link:nth-child(1) { animation-delay: 0.1s; }
-  .mobile-link:nth-child(2) { animation-delay: 0.15s; }
-  .mobile-link:nth-child(3) { animation-delay: 0.2s; }
-  .mobile-link:nth-child(4) { animation-delay: 0.25s; }
-  .mobile-link:nth-child(5) { animation-delay: 0.3s; }
+
+  .mobile-item:nth-child(1) { animation-delay: 0.1s; }
+  .mobile-item:nth-child(2) { animation-delay: 0.15s; }
+  .mobile-item:nth-child(3) { animation-delay: 0.2s; }
+  .mobile-item:nth-child(4) { animation-delay: 0.25s; }
+  .mobile-item:nth-child(5) { animation-delay: 0.3s; }
 </style>

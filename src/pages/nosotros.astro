@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AboutHero from '../components/Nosotros/AboutHero.astro';
+import AboutLegacy from '../components/Nosotros/AboutLegacy.astro';
+import AboutCimientos from '../components/Nosotros/AboutCimientos.astro';
+import AboutShowcase from '../components/Nosotros/AboutShowcase.astro';
+import AboutCTA from '../components/Nosotros/AboutCTA.astro';
+import Brands from '../components/Nosotros/Brands.astro';
+
+/** * SEO & GEO Optimization
+ */
+const title = "Sobre Nosotros | Cortinas & Persianas Zipaquirá";
+const description = "Líderes en cortinas, persianas, control solar ubicados en Zipaquirá. Más de 6 años transformando hogares en la Sabana Centro con ingeniería de vanguardia.";
+
+// Validación de seguridad para la URL canónica
+const canonicalURL = Astro.site 
+  ? new URL(Astro.url.pathname, Astro.site) 
+  : Astro.url.pathname;
+
+
+---
+
+<Layout title={title} description={description}>
+  {Astro.site && <link rel="canonical" href={canonicalURL} slot="head" />}
+  
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Ventanas con Estilo",
+      "alternateName": "Cortinas y Persianas Zipaquira",
+      "description": "Empresa especializada en Venta, Instalación y Mantenimiento de cortinas y persianas en Zipaquirá y sabana centro.",
+      "url": "https://ventanasconestilo.com/nosotros",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Zona Sabana Centro",
+        "addressLocality": "Zipaquirá",
+        "addressRegion": "Cundinamarca",
+        "addressCountry": "CO"
+      },
+      "areaServed": ["Zipaquirá", "Chía", "Cajicá", "Tabio", "Tenjo", "Tocanzipá","Sopo", "Nemocón"],
+      "knowsAbout": ["Cortinas", "Persianas", "Control solar", "Ahorro energético", "cortinas cerca de mi"]
+    }
+  </script>
+
+  <main >
+    <AboutHero />
+    <AboutLegacy />
+    <AboutCimientos />
+    <Brands />
+    <AboutShowcase />
+    <AboutCTA />
+
+  
+  </main>
+</Layout>
+
+<script>
+  // Script de revelado simplificado y eficiente
+  const observerOptions = {
+    threshold: 0.15,
+    rootMargin: "0px 0px -50px 0px"
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0', 'translate-y-8');
+        entry.target.classList.add('opacity-100', 'translate-y-0');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+<style is:global>
+  /* Scroll fluido para toda la página */
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

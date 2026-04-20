@@ -1,0 +1,136 @@
+---
+
+import CTAProduct from '../../components/Productos/CTAProduct.astro';
+import Cta from '../../components/Sheer-elegance/Cta.astro';
+import Features from '../../components/Sheer-elegance/Features.astro';
+import Galleri from '../../components/Sheer-elegance/Galleri.astro';
+import Hero from '../../components/Sheer-elegance/Hero.astro';
+import Specifications from '../../components/Sheer-elegance/Specifications.astro';
+import Technicall from '../../components/Sheer-elegance/Technicall.astro';
+import Layout from '../../layouts/Layout.astro';
+
+/** * ==========================================
+ * SEO & GEO Optimization - Sheer Elegance
+ * ==========================================
+ */
+const title = "Cortinas Sheer Elegance en Zipaquirá y Sabana Centro | Ventanas con Estilo";
+const description = "Control de luz y privacidad total con nuestras Cortinas Sheer Elegance. Diseño moderno a medida con instalación en Zipaquirá, Chía, Cajicá, Sopó y Tocancipá. Cotiza hoy.";
+const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : "https://ventanasconestilo.com/productos/sheer-elegance";
+
+const productSchema = {
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "Cortinas Sheer Elegance",
+  "image": "https://ventanasconestilo.com/wp-content/uploads/2023/10/sheer-elegance-blonde.jpg",
+  "description": "Cortinas modernas tipo cebra (Sheer Elegance) con diseño de franjas intercaladas opacas y translúcidas. Permiten un control exacto de la luminosidad y privacidad con un estilo sofisticado.",
+  "brand": {
+    "@type": "Brand",
+    "name": "Ventanas con Estilo"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "url": canonicalURL,
+    "priceCurrency": "COP",
+    "availability": "https://schema.org/InStock",
+    "priceValidUntil": "2026-12-31",
+    "areaServed": ["Zipaquirá", "Chía", "Cajicá", "Sopó", "Tocancipá"]
+  }
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "name": "Ventanas con Estilo",
+  "image": "https://ventanasconestilo.com/logo.png",
+  "description": "Expertos en cortinas, persianas y control solar en Sabana Centro. Soluciones premium a medida.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Carrera 19 # 17 - 22",
+    "addressLocality": "Zipaquirá",
+    "addressRegion": "Cundinamarca",
+    "addressCountry": "CO"
+  },
+  "areaServed": [
+    { "@type": "City", "name": "Zipaquirá" },
+    { "@type": "City", "name": "Chía" },
+    { "@type": "City", "name": "Cajicá" },
+    { "@type": "City", "name": "Sopó" },
+    { "@type": "City", "name": "Tocancipá" }
+  ],
+  "telephone": "+573208374532",
+  "priceRange": "$$"
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cómo funcionan las cortinas Sheer Elegance?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cuentan con un sistema de doble tela que alterna franjas opacas y translúcidas. Al operarlas, las franjas se superponen, permitiéndote tener visibilidad hacia afuera, luz difusa o privacidad total en un solo mecanismo."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Realizan instalación de Sheer Elegance en Chía y Cajicá?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, realizamos la toma de medidas a domicilio y la instalación certificada en Chía, Cajicá, Zipaquirá, Sopó, Tocancipá y toda la región de Sabana Centro, sin costo adicional por la visita técnica."
+      }
+    }
+  ]
+};
+---
+
+<Layout title={title} description={description}>
+      <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} slot="head"></script>
+  <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} slot="head"></script>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} slot="head"></script>
+
+  <main class="w-full">
+    <div class="reveal opacity-0 translate-y-8 transition-all duration-[1000ms] ease-out">
+      <Hero />
+    </div>
+    
+    <div class="reveal opacity-0 translate-y-8 transition-all duration-[1000ms] ease-out">
+      <Features />
+    </div> 
+    <div class="reveal opacity-0 translate-y-8 transition-all duration-[1000ms] ease-out">
+      <CTAProduct />
+    </div>
+    
+    <div class="reveal opacity-0 translate-y-8 transition-all duration-[1000ms] ease-out">
+     <Technicall />
+    <div class="reveal opacity-0 translate-y-8 transition-all duration-[1000ms] ease-out">
+      <Specifications />
+    </div>
+      <div class="reveal opacity-0 translate-y-8 transition-all duration-[1000ms] ease-out">
+      <Galleri />
+    </div>
+    
+      <Cta />
+    </div>
+    
+   
+  </main>
+ 
+</Layout>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0', 'translate-y-8');
+        entry.target.classList.add('opacity-100', 'translate-y-0');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>

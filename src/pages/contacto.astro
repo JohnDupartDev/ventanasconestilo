@@ -1,0 +1,75 @@
+---
+import HeroContact from '../components/Contacto/HeroContact.astro';
+import Layout from '../layouts/Layout.astro';
+
+/** * SEO & GEO Optimization - Contacto */
+const title = "Contacto | Ventanas con Estilo Zipaquirá";
+const description = "Contáctenos para asesoría personalizada en cortinas y persianas. Agende su visita técnica en Zipaquirá y la Sabana Centro. Atención profesional garantizada.";
+
+const canonicalURL = Astro.site 
+  ? new URL(Astro.url.pathname, Astro.site) 
+  : Astro.url.pathname;
+---
+
+<Layout title={title} description={description}>
+  {Astro.site && <link rel="canonical" href={canonicalURL} slot="head" />}
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Contacto Ventanas con Estilo",
+      "description": "Página de contacto para servicios de cortinas y persianas en Zipaquirá.",
+      "url": "https://ventanasconestilo.com/contacto",
+      "mainEntity": {
+        "@type": "LocalBusiness",
+        "name": "Ventanas con Estilo",
+        "telephone": "+573208374532",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Zona Sabana Centro",
+          "addressLocality": "Zipaquirá",
+          "addressRegion": "Cundinamarca",
+          "addressCountry": "CO"
+        },
+        "areaServed": ["Zipaquirá", "Chía", "Cajicá", "Sopo", "Tocanzipá", "Tabio", "Nemocón"]
+      }
+    }
+  </script>
+
+  <main class="bg-[#0e0e0e] pt-32">
+    
+    <section class="max-w-7xl mx-auto px-6 md:px-8 mb-24">
+        <span class="text-[#dcef42] font-black tracking-[0.5em] text-[10px] uppercase italic mb-4 block">// Atención al Cliente</span>
+        <h1 class="font-['Space_Grotesk'] text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.9]">
+            ¿TIENE DUDAS <br/> <span class="text-[#dcef42] italic">SOBRE SU PROYECTO?</span>
+        </h1>
+        <p class="text-white/50 text-lg md:text-xl mt-8 max-w-2xl font-sans italic">
+            Estamos listos para asesorarlo. Agende su visita técnica o resuelva cualquier duda directamente con nuestros expertos en Zipaquirá.
+        </p>
+    </section>
+
+    <HeroContact />
+
+  </main>
+</Layout>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0', 'translate-y-8');
+        entry.target.classList.add('opacity-100', 'translate-y-0');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

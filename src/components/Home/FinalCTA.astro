@@ -1,0 +1,75 @@
+---
+/* src/components/FinalCTA.astro */
+/* Cierre de alto impacto con efecto de profundidad */
+---
+
+<section class="py-24 px-6 md:px-8 bg-[#0e0e0e] overflow-hidden">
+    <div class="max-w-6xl mx-auto bg-[#dcef42] rounded-[3rem] md:rounded-[4rem] p-8 md:p-12 text-center relative overflow-hidden group shadow-[0_0_50px_rgba(220,239,66,0.15)]">
+        
+        <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] pointer-events-none"></div>
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-white/20 blur-[100px] rounded-full transition-transform duration-1000 group-hover:scale-150"></div>
+        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-[#2e3300]/10 blur-[100px] rounded-full"></div>
+
+        <div class="relative z-10 reveal opacity-0 translate-y-8 transition-all duration-1000">
+            <h2 class="text-4xl md:text-5xl font-['Space_Grotesk'] font-black text-[#2e3300] mb-8 leading-[0.9] tracking-tighter uppercase">
+                ¿LISTO PARA <br class="hidden md:block"/> 
+                <span class="italic">TRANSFORMAR</span> <br class="hidden md:block"/> 
+                SUS VENTANAS?
+            </h2>
+            
+            <p class="text-[#2e3300]/70 text-lg md:text-xl mb-12 max-w-2xl mx-auto font-sans font-bold italic uppercase tracking-tight">
+                Agende hoy mismo una visita técnica <span class="text-[#2e3300]">sin costo</span> en Zipaquirá y reciba su cotización personalizada.
+            </p>
+
+         <a 
+    href="https://wa.me/573208374532?text=Hola,%20quiero%20solicitar%20la%20visita%20técnica%20gratuita"
+    target="_blank"
+    class="
+        /* Layout y Centrado */
+        inline-flex items-center justify-center 
+        
+        /* Colores e Identidad */
+        bg-[#131313] text-[#dcef42] 
+        
+        /* Tipografía Adaptativa */
+        font-['Plus_Jakarta_Sans'] font-black uppercase 
+        text-[10px] md:text-sm 
+        tracking-[0.15em] md:tracking-[0.3em] 
+        
+        /* Botón Amigable (Paddings) */
+        px-8 py-4 
+        md:px-12 md:py-6 
+        
+        /* Bordes y Sombra */
+        rounded-full shadow-xl shadow-black/20 
+        
+        /* Animaciones y Mobile UX */
+        transition-all duration-500 
+        hover:scale-105 hover:bg-black hover:shadow-2xl 
+        active:scale-95 
+        
+        /* Asegurar que no se rompa el texto en móviles pequeños */
+        whitespace-nowrap w-auto
+    "
+>
+    Solicitar Visita Gratis
+</a>
+        </div>
+
+       
+    </div>
+</section>
+
+<script>
+    // Activamos el revelado suave al llegar al final
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.remove('opacity-0', 'translate-y-8');
+                entry.target.classList.add('opacity-100', 'translate-y-0');
+            }
+        });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>

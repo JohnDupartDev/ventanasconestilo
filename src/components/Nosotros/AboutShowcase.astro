@@ -1,0 +1,110 @@
+---
+/* src/components/Nosotros/AboutShowcase.astro */
+const projects = [
+  {
+    title: "Apartamento Zipaquirá",
+    category: "Cortinas Sheer Elegance",
+    image: "/images/apartamento-zipaquira-sheer-eleganse.jpg",
+  },
+  {
+    title: "Casa Tabio",
+    category: "Cortinas Romanas",
+    image: "/images/apartamento-tabio-cortinas-romanas.jpg",
+  },
+  {
+    title: "Apartamento Cajica",
+    category: "Cortinas Sheer Elegance",
+    image: "/images/cajica-cortinas-sheer-elegance.jpg",
+  },
+  {
+    title: "Apartamento Sopo",
+    category: "Panel Japones",
+    image: "/images/panel-japones-sopo.jpg",
+  }
+];
+---
+
+<section class="py-12 bg-[#0e0e0e] overflow-hidden">
+  <div class="max-w-7xl mx-auto">
+    <div class="px-6 md:px-8 mb-8 flex justify-between items-end reveal opacity-0">
+      <div>
+        <span class="text-[#dcef42] font-['Plus_Jakarta_Sans'] text-[8px] md:text-[10px] font-black tracking-[0.4em] uppercase mb-2 block italic opacity-50">// Proyectos</span>
+        <h2 class="font-['Space_Grotesk'] text-2xl md:text-4xl font-black text-white uppercase tracking-tighter leading-none">
+          GALERÍA DE <span class="text-[#dcef42] italic">INSTALACIONES</span>
+        </h2>
+      </div>
+      
+      <div class="hidden md:flex gap-2">
+        <button id="prev-project" class="w-10 h-10 rounded-full flex items-center justify-center border border-white/10 text-white hover:bg-[#dcef42] hover:text-[#2e3300] transition-all">
+          <span class="material-icons-outlined text-sm">west</span>
+        </button>
+        <button id="next-project" class="w-10 h-10 rounded-full flex items-center justify-center border border-white/10 text-white hover:bg-[#dcef42] hover:text-[#2e3300] transition-all">
+          <span class="material-icons-outlined text-sm">east</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="project-slider" class="flex gap-4 md:gap-8 overflow-x-auto px-6 md:px-8 no-scrollbar pb-10 snap-x snap-mandatory">
+      {projects.map((project) => (
+        <div class="
+          /* FORZADO MÓVIL: Muy pequeño y cuadrado (160px) */
+          min-w-[160px] max-w-[340px] aspect-square 
+          /* FORZADO DESKTOP: Grande y panorámico (600px) */
+          md:min-w-[600px] md:max-w-[800px] md:aspect-[16/10] 
+          
+          rounded-[1.5rem] md:rounded-[3rem] 
+          overflow-hidden flex-shrink-0 group relative snap-start border border-white/5 reveal opacity-0 translate-y-6
+        ">
+          <img 
+            alt={project.title} 
+            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" 
+            src={project.image}
+          />
+          
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-[#0e0e0e]/20 to-transparent opacity-90 transition-opacity group-hover:opacity-80"></div>
+          
+          <div class="absolute bottom-0 left-0 right-0 p-4 md:p-10">
+            <div class="flex items-center gap-2 mb-1 md:mb-2">
+                <span class="w-4 h-[1px] bg-[#dcef42] hidden md:block"></span>
+                <p class="font-['Plus_Jakarta_Sans'] text-[7px] md:text-[10px] uppercase text-[#dcef42] font-black tracking-widest">
+                  {project.category}
+                </p>
+            </div>
+            <h4 class="font-['Space_Grotesk'] text-[11px] md:text-2xl font-black text-white uppercase tracking-tight leading-tight">
+              {project.title}
+            </h4>
+          </div>
+        </div>
+      ))}
+      
+      <div class="min-w-[20px] md:min-w-[60px] h-full flex-shrink-0"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const slider = document.getElementById('project-slider');
+  const prevBtn = document.getElementById('prev-project');
+  const nextBtn = document.getElementById('next-project');
+
+  if (slider && prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', () => slider.scrollBy({ left: -450, behavior: 'smooth' }));
+    nextBtn.addEventListener('click', () => slider.scrollBy({ left: 450, behavior: 'smooth' }));
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0', 'translate-y-6');
+        entry.target.classList.add('opacity-100', 'translate-y-0');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+<style>
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+</style>

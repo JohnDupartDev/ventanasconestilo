@@ -1,0 +1,117 @@
+<section class="py-24 relative overflow-hidden">
+  <div class="container mx-auto px-8 relative z-10 text-center">
+    <div class="max-w-4xl mx-auto bg-surface-container border border-white/10 rounded-[3rem] p-12 md:p-24 relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] rounded-full"></div>
+      <div class="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 blur-[100px] rounded-full"></div>
+      
+      <h2 class="font-headline text-4xl md:text-6xl font-bold text-white mb-8 leading-tight">
+          Transforme su espacio hoy <br/><span class="text-primary italic">mismo.</span>
+      </h2>
+      
+      <p class="text-on-surface-variant font-body text-lg mb-12 max-w-xl mx-auto">
+          Agende una visita técnica gratuita en Zipaquirá, Chía o Cajicá. Llevamos las muestras hasta su hogar.
+      </p>
+      
+      <div class="flex flex-col md:flex-row gap-4 justify-center">
+        <button onclick="openWaModal()" class="bg-gradient-to-br from-primary to-primary-container text-black font-label font-bold px-10 py-5 rounded-full hover:scale-105 transition-transform shadow-2xl shadow-primary/20 flex items-center justify-center gap-3">
+            Agendar Visita Técnica
+            <span class="material-symbols-outlined">calendar_month</span>
+        </button>
+        
+        <a href="https://wa.me/573208374532?text=Hola,%20quisiera%20hablar%20con%20un%20experto%20sobre%20sus%20productos." target="_blank" class="bg-white/5 backdrop-blur-lg border border-white/10 text-white font-label font-bold px-10 py-5 rounded-full hover:bg-white/10 transition-all flex items-center justify-center gap-3 group">
+            Hablar con un Experto
+            <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">chat</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="wa-modal" class="fixed inset-0 z-[99999] hidden items-center justify-center">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm cursor-pointer transition-opacity" onclick="closeWaModal()"></div>
+    
+    <div class="relative bg-[#131313] border border-white/10 rounded-3xl p-8 w-full max-w-md shadow-2xl z-10 mx-4 transform transition-all text-left">
+      <button type="button" onclick="closeWaModal()" class="absolute top-4 right-4 text-white/50 hover:text-white bg-white/5 hover:bg-white/10 rounded-full w-8 h-8 flex items-center justify-center transition-colors">
+        <span class="material-symbols-outlined text-sm">close</span>
+      </button>
+      
+      <h3 class="font-headline text-2xl font-bold text-white mb-2">Agendar Visita</h3>
+      <p class="text-white/60 text-sm mb-6">Déjanos tus datos y nos contactaremos vía WhatsApp para confirmar la hora exacta.</p>
+      
+      <form id="wa-form" onsubmit="sendToWhatsApp(event)" class="flex flex-col gap-4">
+        <div>
+          <label for="wa-name" class="block text-xs font-bold text-white/70 uppercase tracking-wider mb-2">Nombre Completo</label>
+          <input type="text" id="wa-name" required placeholder="Ej. Juan Pérez" class="w-full bg-[#0e0e0e] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors">
+        </div>
+        
+        <div>
+          <label for="wa-date" class="block text-xs font-bold text-white/70 uppercase tracking-wider mb-2">Fecha Sugerida</label>
+          <input type="date" id="wa-date" required class="w-full bg-[#0e0e0e] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors [color-scheme:dark]">
+        </div>
+        
+        <div>
+          <label for="wa-msg" class="block text-xs font-bold text-white/70 uppercase tracking-wider mb-2">Detalles del Proyecto</label>
+          <textarea id="wa-msg" rows="3" placeholder="Ej. Necesito cotizar cortinas para la sala..." class="w-full bg-[#0e0e0e] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none"></textarea>
+        </div>
+        
+        <button type="submit" class="mt-2 w-full bg-gradient-to-br from-primary to-primary-container text-black font-label font-bold px-8 py-4 rounded-xl hover:scale-[1.02] transition-transform flex items-center justify-center gap-2">
+          Enviar a WhatsApp
+          <span class="material-symbols-outlined text-lg">send</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  function openWaModal() {
+    const modal = document.getElementById('wa-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+    
+    const dateInput = document.getElementById('wa-date');
+    if (dateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.setAttribute('min', today);
+    }
+  }
+
+  function closeWaModal() {
+    const modal = document.getElementById('wa-modal');
+    if (modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  }
+
+  function sendToWhatsApp(e: { preventDefault: () => void; }) {
+    e.preventDefault(); 
+    
+    // Casteo para TypeScript
+    const nameInput = document.getElementById('wa-name') as HTMLInputElement | null;
+    const dateInput = document.getElementById('wa-date') as HTMLInputElement | null;
+    const msgInput = document.getElementById('wa-msg') as HTMLTextAreaElement | null;
+    
+    const name = nameInput ? nameInput.value : '';
+    const date = dateInput ? dateInput.value : '';
+    const msg = msgInput ? msgInput.value : '';
+    
+    const whatsappText = `¡Hola! Mi nombre es *${name}*.\n\nMe gustaría agendar una visita técnica para el día: *${date}*.\n\n*Detalles del proyecto:*\n${msg || 'Solicitud general de visita técnica.'}`;
+    
+    const whatsappUrl = `https://wa.me/573208374532?text=${encodeURIComponent(whatsappText)}`;
+    window.open(whatsappUrl, '_blank');
+    
+    closeWaModal();
+    const form = document.getElementById('wa-form') as HTMLFormElement | null;
+    if (form) {
+      form.reset();
+    }
+  }
+
+  // EXPOSICIÓN GLOBAL PARA ASTRO:
+  // Al asignarlas a window, permitimos que los atributos "onclick" y "onsubmit" del HTML puedan encontrarlas.
+  (window as any).openWaModal = openWaModal;
+  (window as any).closeWaModal = closeWaModal;
+  (window as any).sendToWhatsApp = sendToWhatsApp;
+</script>

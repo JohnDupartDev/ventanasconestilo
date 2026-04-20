@@ -1,0 +1,70 @@
+---
+/* src/components/Servicios/WhyVCE.astro */
+---
+
+<section class="px-6 md:px-8 py-24 max-w-7xl mx-auto">
+  <div class="text-center mb-20 reveal opacity-0">
+    <span class="text-[#dcef42] font-['Plus_Jakarta_Sans'] text-[10px] font-black tracking-[0.4em] uppercase mb-4 block italic">// Nuestra Diferencia</span>
+    <h2 class="text-4xl md:text-5xl font-['Space_Grotesk'] font-black text-white mb-4 uppercase tracking-tighter">
+      ¿POR QUÉ <span class="text-[#dcef42] italic">VCE</span>?
+    </h2>
+    <p class="text-white/40 max-w-2xl mx-auto font-sans italic text-lg">
+      No solo instalamos cortinas & persianas; aseguramos que cada ventana de su hogar funcione y luzca impecable por años.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
+    <div class="text-center space-y-4 reveal opacity-0 translate-y-8 transition-all duration-700">
+      <div class="w-16 h-16 bg-[#131313] border border-white/5 rounded-full flex items-center justify-center mx-auto text-[#dcef42] group hover:bg-[#dcef42] hover:text-[#2e3300] transition-colors duration-500">
+        <span class="material-icons-outlined text-3xl">verified</span>
+      </div>
+      <h4 class="font-['Space_Grotesk'] font-black text-white text-lg uppercase tracking-tight">Material Técnico</h4>
+      <p class="text-xs md:text-sm text-white/40 font-sans italic leading-relaxed">
+        Trabajamos con telas que realmente protegen sus muebles y pisos del sol de la Sabana.
+      </p>
+    </div>
+
+    <div class="text-center space-y-4 reveal opacity-0 translate-y-8 transition-all duration-700 delay-100">
+      <div class="w-16 h-16 bg-[#131313] border border-white/5 rounded-full flex items-center justify-center mx-auto text-[#dcef42] group hover:bg-[#dcef42] hover:text-[#2e3300] transition-colors duration-500">
+        <span class="material-icons-outlined text-3xl">schedule</span>
+      </div>
+      <h4 class="font-['Space_Grotesk'] font-black text-white text-lg uppercase tracking-tight">Instalación Agil</h4>
+      <p class="text-xs md:text-sm text-white/40 font-sans italic leading-relaxed">
+        Respetamos su agenda. Cumplimos con los tiempos de entrega pactados desde la primera visita.
+      </p>
+    </div>
+
+    <div class="text-center space-y-4 reveal opacity-0 translate-y-8 transition-all duration-700 delay-200">
+      <div class="w-16 h-16 bg-[#131313] border border-white/5 rounded-full flex items-center justify-center mx-auto text-[#dcef42] group hover:bg-[#dcef42] hover:text-[#2e3300] transition-colors duration-500">
+        <span class="material-icons-outlined text-3xl">location_on</span>
+      </div>
+      <h4 class="font-['Space_Grotesk'] font-black text-white text-lg uppercase tracking-tight">Estamos Cerca</h4>
+      <p class="text-xs md:text-sm text-white/40 font-sans italic leading-relaxed">
+        Ubicados en Zipaquirá. Si necesita un ajuste o garantía, llegamos en tiempo récord.
+      </p>
+    </div>
+
+    <div class="text-center space-y-4 reveal opacity-0 translate-y-8 transition-all duration-700 delay-300">
+      <div class="w-16 h-16 bg-[#131313] border border-white/5 rounded-full flex items-center justify-center mx-auto text-[#dcef42] group hover:bg-[#dcef42] hover:text-[#2e3300] transition-colors duration-500">
+        <span class="material-icons-outlined text-3xl">architecture</span>
+      </div>
+      <h4 class="font-['Space_Grotesk'] font-black text-white text-lg uppercase tracking-tight">Asesoría Real</h4>
+      <p class="text-xs md:text-sm text-white/40 font-sans italic leading-relaxed">
+        No le vendemos lo más caro, sino lo que técnicamente funciona para su entrada de luz.
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0', 'translate-y-8');
+        entry.target.classList.add('opacity-100', 'translate-y-0');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>

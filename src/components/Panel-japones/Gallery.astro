@@ -1,0 +1,99 @@
+<section class="py-24 bg-surface-container-low overflow-hidden overflow-x-hidden">
+<div class="container mx-auto px-8 mb-12 flex justify-between items-end">
+<div>
+<h2 class="font-headline text-4xl font-bold text-white mb-4">Materiales & Texturas</h2>
+<p class="text-on-surface-variant">Explore nuestra selección curada de textiles técnicos.</p>
+</div>
+<div class="hidden md:flex gap-4">
+<button onclick="scrollGallery('left')" class="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center text-white hover:bg-primary hover:text-black transition-all">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button onclick="scrollGallery('right')" class="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center text-white hover:bg-primary hover:text-black transition-all">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+
+<div id="gallery-container" class="flex gap-8 px-8 pb-12 overflow-x-auto no-scrollbar scroll-smooth">
+<div class="min-w-[300px] group">
+<div class="aspect-[3/4] rounded-2xl overflow-hidden mb-6 bg-surface-container relative">
+<img alt="Late-silicia" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="close up of premium gray linen fabric texture with visible natural fibers" src="/images/blackout-pvc-bg.webp"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+</div>
+</div>
+<h4 class="font-headline text-xl font-bold text-white mb-1">Blackout PVC</h4>
+<p class="text-on-surface-variant text-sm">Compuestos por 75% PVC y 25% Fibra de Vidrio</p>
+</div>
+
+<div class="min-w-[300px] group">
+<div class="aspect-[3/4] rounded-2xl overflow-hidden mb-6 bg-surface-container relative">
+<img alt="Screen Solar" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="macro shot of high tech screen solar fabric in dark charcoal color with geometric micro perforations" src="/images/screen-charcoal.webp"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+</div>
+</div>
+<h4 class="font-headline text-xl font-bold text-white mb-1">Screen Essential</h4>
+<p class="text-on-surface-variant text-sm">Ofrece un control eficiente de la luz y la temperatura</p>
+</div>
+
+<div class="min-w-[300px] group">
+<div class="aspect-[3/4] rounded-2xl overflow-hidden mb-6 bg-surface-container relative">
+<img alt="Blackout" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="pure black blackout fabric sample with matte finish and solid heavy weave" src="/images/telas-poliester-opacas.webp"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+</div>
+</div>
+<h4 class="font-headline text-xl font-bold text-white mb-1">Telas Opacas</h4>
+<p class="text-on-surface-variant text-sm">Dejan pasar la luz pero mantienen su privacidad</p>
+</div>
+
+<div class="min-w-[300px] group">
+<div class="aspect-[3/4] rounded-2xl overflow-hidden mb-6 bg-surface-container relative">
+<img alt="White Texture" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="creamy white textured fabric with subtle golden threads woven in a minimalist pattern" src="/images/coleccion-luxury.webp"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+</div>
+</div>
+<h4 class="font-headline text-xl font-bold text-white mb-1">Colección Luxury</h4>
+<p class="text-on-surface-variant text-sm">Estilo y elegancia, tejidos en Jacquard</p>
+</div>
+
+<div class="min-w-[300px] group">
+<div class="aspect-[3/4] rounded-2xl overflow-hidden mb-6 bg-surface-container relative">
+<img alt="Fibras Naturales" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="texture of natural woven fibers like bamboo or jute for rustic window blinds" src="/images/apertura-panel-japones.jpg"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+</div>
+</div>
+<h4 class="font-headline text-xl font-bold text-white mb-1">Aperturas y Sistema</h4>
+<p class="text-on-surface-variant text-sm">Los paneles japoneses se pueden fabricar de cuatro maneras</p>
+</div>
+
+</div>
+</section>
+
+<script>
+  function scrollGallery(direction: string) {
+    const container = document.getElementById('gallery-container');
+    if (!container) return;
+    
+    // Calculamos el ancho de una tarjeta (300px) más el gap (32px = gap-8 en Tailwind) = 332px
+    const scrollAmount = 332; 
+    
+    if (direction === 'left') {
+      container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    } else {
+      container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  }
+
+  // Exposición global para que el onClick de Astro lo pueda llamar sin problemas de scope
+  (window as any).scrollGallery = scrollGallery;
+</script>
+<style>
+  /* Ocultar scrollbar para Chrome, Safari y Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Ocultar scrollbar para IE, Edge y Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+</style>

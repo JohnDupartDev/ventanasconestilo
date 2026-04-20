@@ -1,0 +1,122 @@
+---
+/* src/components/Contact.astro */
+/* Sección de contacto con integración directa a WhatsApp y Mapa */
+---
+
+<section id="contacto" class="py-20 bg-[#0e0e0e] overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ">
+            
+            <div class="reveal opacity-0 -translate-x-8 transition-all duration-1000">
+                <div class="mb-10">
+                    <span class="text-[#dcef42] text-[10px] font-black uppercase tracking-[0.5em] mb-4 block">Contacto</span>
+                    <h2 class="text-4xl md:text-6xl font-['Space_Grotesk'] font-black text-white tracking-tighter uppercase leading-none mb-6">
+                        INICIE SU <br/>
+                        <span class="text-[#dcef42] italic">PROYECTO</span>
+                    </h2>
+                    <p class="text-white/40 font-sans italic max-w-sm">
+                        Asesoría técnica inmediata en Zipaquirá y Sabana Centro. Agende su visita hoy mismo.
+                    </p>
+                </div>
+
+                <form id="whatsapp-form" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <input 
+                            type="text" 
+                            id="name" 
+                            placeholder="Nombre" 
+                            required
+                            class="bg-[#131313] border border-white/5 rounded-2xl px-6 py-4 text-white font-sans focus:outline-none focus:border-[#dcef42]/50 transition-colors"
+                        />
+                        <select 
+                            id="service" 
+                            class="bg-[#131313] border border-white/5 rounded-2xl px-6 py-4 text-white/50 font-sans focus:outline-none focus:border-[#dcef42]/50 transition-colors cursor-pointer"
+                        >
+                            <option value="Cotización">Servicio Sugerido</option>
+                            <option value="Persianas Motorizadas">Persianas Motorizadas</option>
+                            <option value="Cortinas Enrollables">Cortinas Enrollables</option>
+                            <option value="Mantenimiento">Mantenimiento</option>
+                        </select>
+                    </div>
+                    <textarea 
+                        id="message" 
+                        placeholder="¿En qué podemos ayudarle?" 
+                        rows="4"
+                        required
+                        class="w-full bg-[#131313] border border-white/5 rounded-2xl px-6 py-4 text-white font-sans focus:outline-none focus:border-[#dcef42]/50 transition-colors resize-none"
+                    ></textarea>
+
+                    <button 
+                        type="submit"
+                        class="w-full bg-[#dcef42] text-[#2e3300] font-['Plus_Jakarta_Sans'] font-black uppercase tracking-[0.2em] py-5 rounded-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-[#dcef42]/5 flex items-center justify-center gap-3 group"
+                    >
+                        Enviar a WhatsApp
+                        <span class="material-icons-outlined group-hover:translate-x-2 transition-transform">send</span>
+                    </button>
+                </form>
+            </div>
+
+            <div class="reveal opacity-0 translate-y-8 transition-all duration-1000 delay-300">
+                <div class="relative rounded-[3rem] overflow-hidden border border-white/5 h-[500px] group shadow-2xl">
+                    <div class="absolute inset-0 bg-[#0e0e0e]/20 pointer-events-none group-hover:bg-transparent transition-colors duration-700"></div>
+                    
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.968586959945!2d-73.9927021!3d5.031608299999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e406faa8bd9739f%3A0xf1cef92895d0df1f!2sVentanas%20con%20estilo%20cortinas%20y%20persianas!5e1!3m2!1ses-419!2sco!4v1776359204524!5m2!1ses-419!2sco" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0; " 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class=" group-hover:scale-100 transition-transform duration-[2s] object-cover"
+                    ></iframe>
+
+                    <div class="absolute bottom-6 left-6 right-6 p-6 bg-[#131313]/90 backdrop-blur-xl border border-white/10 rounded-[2rem]">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-[#dcef42] rounded-full flex items-center justify-center shrink-0 shadow-lg shadow-[#dcef42]/20">
+                                <span class="material-icons-outlined text-[#2e3300] text-xl">location_on</span>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-['Space_Grotesk'] font-bold text-sm uppercase tracking-wider leading-none mb-1">Area de Servicio Zipaquirá</h4>
+                                <p class="text-white/40 text-[10px] uppercase font-sans tracking-widest leading-none">Cundinamarca, y toda Sabana Centro</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    // Lógica de WhatsApp
+    const form = document.getElementById('whatsapp-form') as HTMLFormElement;
+    
+    form?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const name = (document.getElementById('name') as HTMLInputElement).value;
+        const service = (document.getElementById('service') as HTMLSelectElement).value;
+        const message = (document.getElementById('message') as HTMLTextAreaElement).value;
+        
+        const phone = "573208374532";
+        const text = `Hola Ventanas con estilo, mi nombre es ${name}. Me interesa el servicio de ${service}. ${message}`;
+        const encodedText = encodeURIComponent(text);
+        
+        window.open(`https://wa.me/${phone}?text=${encodedText}`, '_blank');
+    });
+
+    // Observer para animaciones
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.remove('opacity-0', 'translate-y-8', '-translate-x-8');
+                entry.target.classList.add('opacity-100', 'translate-y-0', 'translate-x-0');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>

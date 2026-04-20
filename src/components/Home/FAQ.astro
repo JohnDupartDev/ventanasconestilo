@@ -1,0 +1,136 @@
+---
+/* src/components/FAQ.astro */
+const faqs = [
+    {
+        question: "¿Realizan visitas técnicas en Zipaquirá?",
+        answer: "Sí, realizamos visitas técnicas y de asesoría sin costo adicional en Zipaquirá, Chía, Cajicá y toda la Sabana Centro para garantizar medidas exactas.",
+    },
+    {
+        question: "¿Qué garantía tienen los sistemas motorizados?",
+        answer: "Nuestros motores cuentan con una garantía certificada de 5 años. Utilizamos tecnología de alta gama que asegura un movimiento silencioso y duradero.",
+    },
+    {
+        question: "¿Cuál es el tiempo de entrega e instalación?",
+        answer: "El tiempo promedio es de 8 a 12 días hábiles, dependiendo de la personalización de la tela y el sistema elegido. La instalación se realiza en un solo día.",
+    },
+    {
+        question: "¿Ofrecen servicio de mantenimiento y lavado?",
+        answer: "Contamos con un nodo especializado en mantenimiento preventivo, reparación de accesorios y lavado profesional para prolongar la vida útil de sus cortinas.",
+    },
+];
+---
+
+<section class="py-20 bg-[#0e0e0e]">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="flex flex-col lg:flex-row gap-16 items-center">
+            
+            <div class=" hidden lg:block w-full lg:w-1/2 reveal opacity-0 -translate-x-8 transition-all duration-1000">
+                <div class="relative group rounded-[2.5rem] overflow-hidden border border-white/5">
+                    <img 
+                        class="w-full h-[500px] object-cover brightness-50 group-hover:scale-105 transition-transform duration-1000 grayscale group-hover:grayscale-0"
+                        src="/images/preguntas.jpg"
+                        alt="Instalación de lujo" 
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-transparent to-transparent opacity-80"></div>
+                    <div class="absolute bottom-10 left-10">
+                    <a 
+                    href="https://wa.me/573208374532?text=Hola,%20queremos%20información%20sobre%20sus%20servicios"
+                    target="_blank"
+                    class="w-full sm:w-auto bg-[#dcef42] text-[#2e3300] px-10 py-5 rounded-full font-['Plus_Jakarta_Sans'] font-black text-[11px] uppercase tracking-[0.2em] hover:scale-105 hover:shadow-[0_0_40px_rgba(220,239,66,0.5)] active:scale-95 transition-all duration-300 text-center shadow-xl shadow-[#dcef42]/10"
+                >
+                    Preguntar
+                </a></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full lg:w-1/2 reveal opacity-0 translate-y-8 transition-all duration-1000 delay-200">
+                <div class="mb-10">
+                    <span class="text-[#dcef42] text-[10px] font-black uppercase tracking-[0.5em] mb-4 block">Preguntas Frecuentes</span>
+                    <h2 class="text-4xl md:text-5xl font-['Space_Grotesk'] font-black text-white tracking-tighter uppercase leading-none">
+                        RESOLVEMOS <br/>
+                        <span class="text-[#dcef42] italic">SUS DUDAS</span>
+                    </h2>
+                    <p class="text-white/40 mt-6 font-sans italic text-sm md:text-base max-w-md">
+                        Encuentre respuestas rápidas sobre nuestros procesos de venta, instalación y soporte técnico local.
+                    </p>
+                </div>
+
+                <div class="space-y-2">
+                    {faqs.map((faq, index) => (
+                        <div class="faq-item border-b border-white/5 group">
+                            <button 
+                                class="faq-trigger w-full py-6 flex items-center justify-between text-left outline-none group"
+                                aria-expanded="false"
+                            >
+                                <h3 class="text-white group-hover:text-[#dcef42] font-['Plus_Jakarta_Sans'] font-bold text-sm md:text-base transition-colors uppercase tracking-tight">
+                                    {faq.question}
+                                </h3>
+                                <div class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#dcef42]/40 transition-all">
+                                    <span class="material-icons-outlined text-white/20 group-hover:text-[#dcef42] text-sm transition-transform duration-500 faq-icon">
+                                        add
+                                    </span>
+                                </div>
+                            </button>
+                            <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0">
+                                <p class="pb-6 text-white/50 text-sm font-sans italic leading-relaxed max-w-lg">
+                                    {faq.answer}
+                                </p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const triggers = document.querySelectorAll('.faq-trigger');
+
+    triggers.forEach(trigger => {
+        trigger.addEventListener('click', () => {
+            const parent = trigger.parentElement;
+            const content = parent?.querySelector('.faq-content') as HTMLElement;
+            const icon = trigger.querySelector('.faq-icon');
+            const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+
+            // Cerrar otros
+            document.querySelectorAll('.faq-content').forEach(el => {
+                (el as HTMLElement).style.maxHeight = '0px';
+                (el as HTMLElement).style.opacity = '0';
+            });
+            document.querySelectorAll('.faq-trigger').forEach(el => el.setAttribute('aria-expanded', 'false'));
+            document.querySelectorAll('.faq-icon').forEach(el => (el as HTMLElement).innerText = 'add');
+
+            // Abrir el actual
+            if (!isOpen) {
+                trigger.setAttribute('aria-expanded', 'true');
+                if (content) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    content.style.opacity = '1';
+                }
+                if (icon) (icon as HTMLElement).innerText = 'remove';
+            }
+        });
+    });
+
+    // Reutilizar el observer para revelado al scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.remove('opacity-0', 'translate-y-8', '-translate-x-8');
+                entry.target.classList.add('opacity-100', 'translate-y-0', 'translate-x-0');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+<style>
+    /* Suavizado de la transición del acordeón */
+    .faq-content {
+        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+    }
+</style>

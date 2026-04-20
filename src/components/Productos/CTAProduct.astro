@@ -1,0 +1,26 @@
+---
+/* src/components/Productos/CTAProduct.astro */
+---
+
+<div style="position: fixed; bottom: 2rem; right: 2rem; z-index: 2147483647;">
+  <div class="flex flex-col items-end group">
+    
+    <div class="opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto translate-y-4 group-hover:translate-y-0 transition-all duration-300 ease-out bg-[#131313] p-6 rounded-3xl shadow-2xl border border-white/5 mb-4 max-w-[260px]">
+      <p class="font-['Space_Grotesk'] font-bold text-white text-xl">Asesoría Inmediata</p>
+      <p class="text-sm text-white/60 italic mt-2 mb-5">Habla con un experto sobre tu proyecto en Sabana Centro.</p>
+      <a href="https://wa.me/573208374532" target="_blank" class="block w-full text-center bg-[#0e0e0e] border border-white/10 text-white hover:bg-[#dcef42] hover:text-[#131313] hover:border-[#dcef42] text-[11px] font-black py-3 rounded-full uppercase tracking-widest transition-all duration-300">
+        Contactar
+      </a>
+    </div>
+    
+    <a href="https://wa.me/573208374532" target="_blank" class="bg-[#dcef42] text-[#131313] rounded-full w-16 h-16 shadow-[0_0_30px_rgba(220,239,66,0.3)] flex items-center justify-center hover:scale-110 hover:shadow-[0_0_40px_rgba(220,239,66,0.5)] transition-all duration-300 cursor-pointer relative">
+      <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">chat</span>
+      
+      <span class="absolute top-0 right-0 flex h-4 w-4">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-4 w-4 bg-white border-2 border-[#dcef42]"></span>
+      </span>
+    </a>
+
+  </div>
+</div>

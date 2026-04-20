@@ -1,0 +1,152 @@
+---
+/* src/components/Testimonials.astro */
+const TESTIMONIALS = [
+  {
+    id: "t1",
+    name: "James S.",
+    role: "Arquitecto",
+    rating: 5,
+    description: "La precisión en la instalación y el cumplimiento de los tiempos hicieron que nuestro proyecto fuera un éxito. ¡Muy recomendados!",
+    avatarUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop",
+  },
+  {
+    id: "t2",
+    name: "Jessica H.",
+    role: "Diseñadora de Interiores",
+    rating: 5,
+    description: "La atención al detalle en las persianas motorizadas es excepcional. Mis clientes quedaron fascinados con el resultado final.",
+    avatarUrl: "https://plus.unsplash.com/premium_photo-1690407617542-2f210cf20d7e?w=200&auto=format&fit=crop&q=60",
+  },
+  {
+    id: "t3",
+    name: "Lisa M.",
+    role: "Propietaria",
+    rating: 5,
+    description: "Un cambio total para mi casa. El control solar es increíble y la estética de las cortinas romanas definió cada rincón.",
+    avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=60",
+  },
+  {
+    id: "t4",
+    name: "Jane D.",
+    role: "Constructora",
+    rating: 4.5,
+    description: "Calidad de materiales insuperable. El nodo de Zipaquirá nos brindó una atención inmediata y profesional.",
+    avatarUrl: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&auto=format&fit=crop&q=60",
+  },
+];
+---
+
+<section id="testimonial-section" class="relative bg-[#0e0e0e] h-[400vh]">
+  
+  <div class="hidden lg:block">
+      <div class="fixed left-[10%] top-1/2 -translate-y-1/2 opacity-5 pointer-events-none" id="icon-sun">
+          <span class="material-icons-outlined text-[18rem] text-white">light_mode</span>
+      </div>
+      <div class="fixed right-[10%] top-1/2 -translate-y-1/2 opacity-5 pointer-events-none" id="icon-rule">
+          <span class="material-icons-outlined text-[18rem] text-white rotate-90">light_mode</span>
+      </div>
+  </div>
+
+  <div class="sticky top-10 h-screen w-full flex flex-col items-center justify-center overflow-hidden px-6">
+    
+    <div class="text-center mb-12 reveal opacity-0">
+      <h2 class="text-4xl md:text-6xl font-['Space_Grotesk'] font-black text-white mb-4 tracking-tighter uppercase leading-none">
+        CASOS DE <span class="text-[#dcef42] italic">ÉXITO</span>
+      </h2>
+      <p class="text-white/40 max-w-lg mx-auto italic font-sans text-sm">
+        Satisfacción garantizada en cada rincón de la Sabana Centro.
+      </p>
+    </div>
+
+    <div id="cards-container" class="relative w-full max-w-[400px] h-[450px] perspective-[1500px]">
+      {TESTIMONIALS.map((t, i) => (
+        <article 
+          class="testimonial-card absolute inset-0 bg-[#1f1f1f] border border-white/5 rounded-[2.5rem] p-10 flex flex-col justify-between shadow-2xl origin-bottom"
+          style={`z-index: ${TESTIMONIALS.length - i};`}
+        >
+          <div class="flex gap-1 mb-6">
+            {[...Array(5)].map((_, index) => (
+              <span class={`material-icons-outlined text-sm ${index < Math.floor(t.rating) ? 'text-[#dcef42]' : 'text-white/10'}`}>
+                star
+              </span>
+            ))}
+          </div>
+
+          <blockquote class="text-white/80 text-lg md:text-xl font-sans italic leading-relaxed mb-8">
+            "{t.description}"
+          </blockquote>
+
+          <div class="flex items-center gap-4 border-t border-white/5 pt-8">
+            <div class="w-12 h-12 rounded-full overflow-hidden border border-[#dcef42]/20 shrink-0">
+              <img src={t.avatarUrl} alt={t.name} class="w-full h-full object-cover" />
+            </div>
+            <div class="overflow-hidden text-left">
+              <p class="text-white font-['Space_Grotesk'] font-black uppercase text-sm tracking-widest truncate">{t.name}</p>
+              <p class="text-[#dcef42] text-[10px] font-bold uppercase tracking-tighter opacity-60 truncate">{t.role}</p>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { animate, scroll } from "motion";
+
+  const section = document.getElementById('testimonial-section');
+  const cards = document.querySelectorAll('.testimonial-card');
+  const sun = document.getElementById('icon-sun');
+  const rule = document.getElementById('icon-rule');
+
+  if (section && cards.length > 0) {
+    scroll(
+      (progress: number) => {
+        // Animación de los iconos laterales (Rotación sutil con el scroll)
+        if (sun) sun.style.transform = `translateY(-50%) rotate(${progress * 45}deg)`;
+        if (rule) rule.style.transform = `translateY(-50%) rotate(${90 + (progress * -20)}deg)`;
+
+        cards.forEach((card, index) => {
+          const element = card as HTMLElement;
+          const step = 1 / cards.length;
+          const start = index * step;
+          const localProgress = Math.max(0, Math.min(1, (progress - start) / (step)));
+
+          if (index < cards.length - 1) {
+            const yMove = localProgress * -550; 
+            const rotate = localProgress * -12;
+            const opacity = 1 - (localProgress * 1.8);
+            const scale = 1 - (localProgress * 0.1);
+
+            element.style.transform = `translateY(${yMove}px) rotate(${rotate}deg) scale(${scale})`;
+            element.style.opacity = `${Math.max(0, opacity)}`;
+          } else {
+            element.style.transform = `translateY(0px) scale(1)`;
+            element.style.opacity = `1`;
+          }
+        });
+      },
+      {
+        target: section,
+        offset: ["start 0.1", "end end"]
+      }
+    );
+  }
+
+  const reveal = document.querySelector('.reveal');
+  if (reveal) {
+      animate(reveal, { opacity: [0, 1], y: [20, 0] }, { duration: 0.8 });
+  }
+</script>
+
+<style>
+  .testimonial-card {
+    will-change: transform, opacity;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s linear;
+  }
+  
+  /* Aseguramos que los iconos no se vean fuera de su sección */
+  #testimonial-section {
+    clip-path: inset(0 0 0 0);
+  }
+</style>

@@ -1,0 +1,67 @@
+---
+/* src/components/Brands.astro */
+const brands = [
+  { name: "Pentagram", src: "/images/logos/pentagrama-white.png" },
+  { name: "UnoxUno", src: "/images/logos/logo-unoxuno.png" },
+  { name: "Panorama", src: "/images/logos/logo-panorama.png" },
+  { name: "Flexalum", src: "/images/logos/logo-texicor.png" },
+];
+---
+
+<section class="py-20 bg-[#0e0e0e] overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 md:px-8">
+    
+    <div class="reveal opacity-0 mb-12">
+      <h3 class="text-center font-['Plus_Jakarta_Sans'] text-[10px] md:text-xs font-black text-white/30 uppercase tracking-[0.5em]">
+        Respaldados por la mejor ingeniería textil
+      </h3>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border border-white/5 reveal opacity-0 translate-y-8 transition-all duration-1000 delay-200">
+      {brands.map((brand) => (
+        <div class="group relative flex items-center justify-center h-24 md:h-32 border border-white/5 bg-[#131313]/50 hover:bg-[#1f1f1f] transition-all duration-500 overflow-hidden">
+          
+          <div class="absolute inset-0 bg-[#dcef42]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-2xl"></div>
+          
+          <div class="relative z-10 p-4">
+             <img 
+                src={brand.src} 
+                alt={brand.name} 
+                class="h-10 md:h-12 w-auto object-contain opacity-30 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" 
+             />
+          </div>
+
+          <div class="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/10 group-hover:border-[#dcef42]/40 transition-colors"></div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-12 text-center reveal opacity-0 delay-500">
+      <p class="text-white/20 text-[10px] font-sans italic tracking-widest">
+        VENTANAS CON ESTILO DISTRIBUIDOR AUTORIZADO ZIPAQUIRÁ 
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Reutilizamos el observer para mantener la coherencia de animaciones
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0', 'translate-y-8');
+        entry.target.classList.add('opacity-100', 'translate-y-0');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+<style>
+  /* Ajuste para que los bordes internos no se dupliquen visualmente */
+  .grid > div {
+    margin-left: -1px;
+    margin-top: -1px;
+  }
+</style>

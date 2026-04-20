@@ -1,0 +1,87 @@
+---
+/* src/components/Brands.astro */
+const brands = [
+  { name: "Pentagram", src: "/images/logos/pentagrama-white.png" },
+  { name: "UnoxUno", src: "/images/logos/logo-unoxuno.png" },
+  { name: "Panorama", src: "/images/logos/logo-panorama.png" },
+  { name: "Flexalum", src: "/images/logos/logo-texicor.png" },
+];
+
+const scrollingBrands = [...brands, ...brands, ...brands, ...brands];
+---
+
+<section class="py-16 bg-[#0e0e0e] overflow-hidden border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6 md:px-8">
+    
+    <div class="reveal opacity-0 mb-10 flex items-center gap-4">
+      <span class="h-[1px] w-8 bg-[#dcef42]/30"></span>
+      <h3 class="font-['Plus_Jakarta_Sans'] text-[9px] font-black text-[#dcef42]/60 uppercase tracking-[0.4em]">
+        Distribuidores Autorizados
+      </h3>
+    </div>
+
+    <div class="relative flex overflow-hidden group">
+      <div class="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#0e0e0e] to-transparent z-10"></div>
+      <div class="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#0e0e0e] to-transparent z-10"></div>
+
+      <div class="flex animate-infinite-scroll py-4 items-center">
+        {scrollingBrands.map((brand) => (
+          <div class="flex items-center justify-center px-10 md:px-16 flex-shrink-0">
+            <img 
+              src={brand.src} 
+              alt={brand.name}
+              class="h-10 md:h-16 w-auto object-contain opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-700"
+              onload="this.classList.add('loaded')"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="mt-10 reveal opacity-0 delay-300">
+      <p class="text-white/10 text-[8px] font-sans font-bold tracking-[0.5em] uppercase text-center md:text-left">
+        Ingeniería Textil // Certificada 2026
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0');
+        entry.target.classList.add('opacity-100');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+<style>
+  @keyframes infinite-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .animate-infinite-scroll {
+    display: flex;
+    width: max-content;
+    animation: infinite-scroll 60s linear infinite;
+  }
+
+  .group:hover .animate-infinite-scroll {
+    animation-play-state: paused;
+  }
+
+  /* Ajuste crítico: asegura que la imagen tenga dimensiones base */
+  img {
+    display: block;
+    max-height: 60px; /* Ajusta según el tamaño real de tus logos */
+   
+  }
+  
+  
+  
+</style>

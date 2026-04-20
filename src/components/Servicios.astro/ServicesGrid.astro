@@ -1,0 +1,84 @@
+---
+/* src/components/Servicios/ServicesGrid.astro */
+---
+
+<section class="py-24 bg-[#0e0e0e]">
+  <div class="max-w-7xl mx-auto px-6 md:px-8">
+    
+    <div class="mb-16 reveal opacity-0 translate-y-8">
+      <h2 class="font-['Space_Grotesk'] text-4xl md:text-5xl font-black text-white mb-4 uppercase tracking-tighter">
+        ESPECIALISTAS EN <span class="text-[#dcef42] italic">Cortinas & Persianas</span>
+      </h2>
+      <div class="h-1 w-24 bg-[#dcef42] rounded-full"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <div class="lg:col-span-2 group rounded-[2.5rem] bg-[#131313] p-10 border border-white/5 hover:border-[#dcef42]/20 transition-all">
+        <div class="flex flex-col h-full justify-between gap-12">
+          <div>
+            <span class="material-icons-outlined text-[#dcef42] text-4xl mb-6">straighten</span>
+            <h3 class="font-['Space_Grotesk'] text-3xl font-black text-white mb-4 uppercase">Venta a Medida</h3>
+            <p class="text-white/50 text-lg leading-relaxed mb-6 font-sans italic">
+Cortinas y persianas hechas a la medida de sus espacios. Le ayudamos a elegir la mejor opción para controlar la luz y mejorar la comodidad en su hogar u oficina.            </p>
+            <ul class="space-y-3 font-['Plus_Jakarta_Sans'] text-[10px] uppercase tracking-[0.2em] text-white/70">
+              <li class="flex items-center gap-2"><span class="text-[#dcef42]">✓</span> Toma de medidas en obra (sin costo)</li>
+              <li class="flex items-center gap-2"><span class="text-[#dcef42]">✓</span> Telas técnicas con alta protección UV</li>
+              <li class="flex items-center gap-2"><span class="text-[#dcef42]">✓</span> Garantía directa - Provedores Autorizados</li>
+            </ul>
+          </div>
+          <div class="aspect-[16/6] rounded-2xl overflow-hidden mt-8 opacity-80 group-hover:opacity-100 transition-opacity">
+            <img class="w-full h-full object-cover" src="/images/telas-cortinas.jpg" alt="Catálogo telas VCE" />
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-[#dcef42] text-[#2e3300] p-10 rounded-[2.5rem] flex flex-col justify-between">
+        <div>
+          <span class="material-icons-outlined text-5xl mb-6">palette</span>
+         <h3 class="font-['Space_Grotesk'] text-3xl font-black mb-4 uppercase">Asesoría personalizada</h3>
+           <p class="text-[#2e3300]/80 text-lg font-medium italic">
+            Le ayudamos a elegir la mejor opción para sus espacios. Visitamos su hogar u oficina, revisamos la entrada de luz y le recomendamos la cortina o persiana más adecuada.
+        </p>
+        </div>
+       <a href="https://wa.me/573208374532" 
+   class="group mt-8 bg-[#2e3300] text-[#dcef42] px-8 py-4 rounded-full font-black text-[10px] uppercase tracking-[0.2em] flex items-center justify-between hover:scale-105 transition-all duration-500 overflow-hidden">
+    
+    <span class="mr-4">Agendar Cita</span>
+    
+    <span class="material-icons-outlined text-sm transform -rotate-45 group-hover:rotate-0 transition-transform duration-500 ease-out">
+        arrow_forward
+    </span>
+    
+</a>
+      </div>
+
+      <div class="bg-[#131313] p-10 rounded-[2.5rem] border border-white/5 hover:border-[#dcef42]/20 transition-all group">
+        <span class="material-icons-outlined text-[#dcef42] text-4xl mb-6">construction</span>
+        <h3 class="font-['Space_Grotesk'] text-2xl font-black text-white mb-4 uppercase">Instalación Profesional</h3>
+        <p class="text-white/50 mb-6 italic">
+          Cero polvo, cero complicaciones. Nuestros técnicos instalan con equipos de precisión para asegurar durabilidad y un acabado estético impecable.
+        </p>
+        <div class="bg-[#0e0e0e] p-6 rounded-2xl border border-white/5">
+          <p class="text-[9px] font-black text-[#dcef42] uppercase tracking-[0.2em] mb-2">Compromiso VCE</p>
+          <p class="text-xs text-white/70 italic">"Instalación nivelada y funcionamiento fluido garantizado."</p>
+        </div>
+      </div>
+
+      <div class="lg:col-span-2 rounded-[2.5rem] bg-[#131313] p-10 border border-white/5 hover:border-[#dcef42]/20 transition-all">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <span class="material-icons-outlined text-[#dcef42] text-4xl mb-6">home_repair_service</span>
+            <h3 class="font-['Space_Grotesk'] text-2xl font-black text-white mb-4 uppercase">Mantenimiento y Reparación</h3>
+            <p class="text-white/50 leading-relaxed italic">
+              Prolongamos la vida de sus persianas y cortinas. Desde reparaciones de mecanismos complejos hasta limpieza especializada. Hacemos que sus sistemas luzcan y funcionen como el primer día.
+            </p>
+          </div>
+          <div class="aspect-square md:aspect-video rounded-2xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
+            <img class="w-full h-full object-cover" src="/images/instalacion-persianas.jpg" alt="Mantenimiento técnico VCE" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
